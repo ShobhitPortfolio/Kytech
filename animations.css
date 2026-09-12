@@ -1,0 +1,62 @@
+/* ============================================================
+   KYTECH — ANIMATIONS
+   Scroll-reveal system, keyframes, cursor ring, and the
+   scroll-progress bar. Depends on color tokens from styles.css
+   (--off-white, --ease, --ease-slow) — load styles.css first.
+   ============================================================ */
+
+/* reveal */
+.reveal{
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 1s var(--ease-slow), transform 1s var(--ease-slow);
+}
+.reveal.in{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* scroll-progress */
+.scroll-progress{
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--off-white);
+  z-index: 200;
+  transition: width 0.1s linear;
+}
+
+/* cursor-ring */
+.cursor-ring{
+  position: fixed;
+  top: 0; left: 0;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--off-white);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  transition: width .3s var(--ease), height .3s var(--ease), border-color .3s var(--ease), opacity .3s var(--ease), background-color .3s var(--ease);
+  opacity: 0;
+  will-change: transform;
+}
+.cursor-ring.visible{ opacity: 1; }
+.cursor-ring.hover{
+  width: 56px;
+  height: 56px;
+  background: rgba(248,248,248,0.06);
+  border-color: var(--off-white);
+}
+@media (hover: none), (pointer: coarse){
+  .cursor-ring{ display: none; }
+}
+
+/* keyframes-scrollcue */
+@keyframes scrollcue{
+  0%{ top:-100%; }
+  60%{ top:100%; }
+  100%{ top:100%; }
+}
+
